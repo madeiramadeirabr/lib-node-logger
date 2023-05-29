@@ -1,0 +1,31 @@
+name: GMUD
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+    branches:      
+      - production
+
+jobs:
+  create-gmud:
+    runs-on: ubuntu-latest
+    name: 'create-gmud'
+    steps:
+      - if: github.event.pull_request.user.login != 'dependabot[bot]'
+        uses: madeiramadeirabr/action-generate-gmud-sre@v1
+        with: 
+          domain: 'madeiramadeira'
+          basic-auth: 
+          api-key: 
+          auth-github: 
+          service-desk-id: '31'
+          request-type-id: '538'
+          technical-approval: 
+          business-approval: 
+          url-pull-request: /
+          url-slifer-gmud:          
+
+      - if: github.event.pull_request.user.login != 'dependabot[bot]'
+        uses: madeiramadeirabr/action-validate-deploy-date@0.1.1
+        with:
+          domain: "madeiramadeira"
+          basic-auth: 

@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: lib-nodejs-logger
+  annotations:
+    github.com/project-slug: madeiramadeirabr/lib-nodejs-logger
+    sonarqube.org/project-key: madeiramadeirabr/lib-nodejs-logger
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:default/squad-sre

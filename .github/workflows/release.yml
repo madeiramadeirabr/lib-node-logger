@@ -1,0 +1,15 @@
+name: release
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release
+        id: release
+        uses: madeiramadeirabr/action-generate-release@1.0.0
+        with:
+          github-token: 

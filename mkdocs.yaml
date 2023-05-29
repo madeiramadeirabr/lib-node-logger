@@ -1,0 +1,11 @@
+site_name: 'Basic repository'
+site_description: 'Documentação de apoio do basic repository'
+repo_url: https://github.com/madeiramadeirabr/basic-repository
+edit_uri: edit/production/docs
+
+plugins:
+  - techdocs-core
+
+nav:
+  # - Catálogo: catalog.md Consulte a doc para entender como utilizar 
+  # https://madeiramadeira.atlassian.net/wiki/spaces/DX/pages/2792980526/TechDocs
