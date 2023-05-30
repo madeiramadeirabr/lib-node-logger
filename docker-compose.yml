@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  php:
+    container_name: lib-nodejs-logger
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - .:/app

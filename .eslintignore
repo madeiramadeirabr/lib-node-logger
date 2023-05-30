@@ -8,5 +8,5 @@ dist
 yarn-error.log
 # vscode config
 .vscode
-#coverage
+# test coverage
 coverage
