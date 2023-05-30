@@ -40,7 +40,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "tests",
+    "rootDir": "",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": [
@@ -51,17 +51,15 @@
       ]
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "src/**/*.(t|j)s"
     ],
     "coveragePathIgnorePatterns": [
-      "config/*",
-      "test/fixture/*",
-      "container.ts"
+      "src/container.ts"
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "setupFiles": [
-      "<rootDir>/setup/jest-ts-auto-mock-config.ts"
+      "<rootDir>/tests/setup/jest-ts-auto-mock-config.ts"
     ]
   }
 }

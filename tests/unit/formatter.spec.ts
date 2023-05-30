@@ -1,6 +1,6 @@
 import { LogLevel } from "../../src/core/type/log-level";
 import { Formatter } from "../../src/core/formatter";
-import { formatResponse } from "../stubs/formatResponse";
+import { formatInfoResponse } from "../stubs/formatResponse";
 
 describe("Formatter", () => {
 
@@ -12,10 +12,8 @@ describe("Formatter", () => {
 
 
     it("Should format correctly", () => {
-
         const response = formatter.format("mensagem", LogLevel.info, {global_event_name: "teste"});
-
-        const expected = formatResponse;
+        const expected = formatInfoResponse;
         
         expect(response).toBe(expected);
     });
