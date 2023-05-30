@@ -7,7 +7,7 @@ describe("Formatter", () => {
     let formatter = new Formatter("service");
 
     beforeEach(() => {
-		jest.useFakeTimers().setSystemTime(new Date(2021, 0, 1));
+		jest.spyOn(Date.prototype, "toISOString").mockReturnValue("2021-01-01T03:00:00.000Z")
 	});
 
 
