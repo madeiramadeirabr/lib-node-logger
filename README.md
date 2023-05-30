@@ -1,5 +1,10 @@
 # lib-nodejs-logger
 
+![branches](./icons/badge-branches.svg)
+![functions](./icons/badge-functions.svg)
+![lines](./icons/badge-lines.svg)
+![statements](./icons/badge-statements.svg)
+
 ### Descrição
 Biblioteca em Node que implementa a [MMRFC](https://madeiramadeira.atlassian.net/wiki/spaces/S/pages/2317942893/MMRFC+1+-+Log) de Logs
 
