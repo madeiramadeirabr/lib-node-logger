@@ -9,6 +9,6 @@ export class Handler implements HandlerInterface {
     }
 
     handle(message: string): void {
-        console.log(message);
+        process.stdout.write(message);
     }
 }
