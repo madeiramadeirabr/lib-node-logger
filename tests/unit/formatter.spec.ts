@@ -1,6 +1,6 @@
 import { LogLevel } from '../../src/core/type/log-level';
 import { Formatter } from '../../src/core/formatter';
-import { formatInfoResponse } from '../stubs/formatResponse';
+import { formatInfoResponse } from '../stubs/format-response';
 
 describe('Formatter', () => {
   let formatter = new Formatter('service');

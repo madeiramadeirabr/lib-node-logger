@@ -10,7 +10,7 @@ import {
   formatInfoResponse,
   formatTraceResponse,
   formatWarningResponse,
-} from '../stubs/formatResponse';
+} from '../stubs/format-response';
 
 describe('Logger', () => {
   let handlerMock = createMock<HandlerInterface>({
