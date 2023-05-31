@@ -60,7 +60,8 @@
       "src/container.ts"
     ],
     "coverageReporters": [
-      "json-summary"
+      "json-summary",
+      "lcov"
     ],
     "coverageDirectory": "coverage/",
     "testEnvironment": "node",
