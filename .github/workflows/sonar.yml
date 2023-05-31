@@ -17,10 +17,6 @@ jobs:
         run: npm ci
       - name: Test and coverage
         run: npm run test:coverage
-       
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
