@@ -13,9 +13,9 @@ describe('Handler', () => {
   describe('isHandling', () => {
     const levels = Object.values(LogLevel);
 
-    levels.map((levelHandler) => {
+    levels.forEach((levelHandler) => {
       let handler = new Handler(streamLoggerMock, levelHandler);
-      levels.map((levelMessage) => {
+      levels.forEach((levelMessage) => {
         let expected =
           handler.levelStringToInt(levelMessage) >=
           handler.levelStringToInt(levelHandler);
