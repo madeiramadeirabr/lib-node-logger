@@ -6,6 +6,6 @@ metadata:
     github.com/project-slug: madeiramadeirabr/lib-nodejs-logger
     sonarqube.org/project-key: madeiramadeirabr/lib-nodejs-logger
 spec:
-  type: service
+  type: library
   lifecycle: experimental
   owner: group:default/squad-sre
