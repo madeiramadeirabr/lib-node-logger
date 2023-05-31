@@ -1,7 +1,10 @@
 import { Readable } from 'stream';
 import { StreamLoggerInterface } from './interface/stream-logger';
 
-export class StreamLogger extends Readable implements StreamLoggerInterface {
+export class NodeStreamLogger
+  extends Readable
+  implements StreamLoggerInterface
+{
   constructor() {
     super();
     this.pipe(process.stdout);

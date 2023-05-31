@@ -5,7 +5,7 @@ import { Handler } from './core/handler';
 import { FormatterInterface } from './core/interface/formatter';
 import { Formatter } from './core/formatter';
 import { Config } from './core/type/config';
-import { StreamLogger } from 'core/logger-stream';
+import { NodeStreamLogger } from 'core/node-logger-stream';
 import { StreamLoggerInterface } from 'core/interface/stream-logger';
 
 export class Container {
@@ -43,8 +43,8 @@ export class Container {
   }
 
   public static makeStreamLogger(): StreamLoggerInterface {
-    return Container.make<StreamLogger>('StreamLogger', () => {
-      return new StreamLogger();
+    return Container.make<NodeStreamLogger>('StreamLogger', () => {
+      return new NodeStreamLogger();
     });
   }
 }
