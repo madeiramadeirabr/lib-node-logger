@@ -12,4 +12,4 @@ jobs:
         id: release
         uses: madeiramadeirabr/action-generate-release@1.0.0
         with:
-          github-token: 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
