@@ -1,129 +1,157 @@
 import { createMock } from 'ts-auto-mock';
-import { Logger } from "../../src/core/logger";
+import { Logger } from '../../src/core/logger';
 import { HandlerInterface } from '../../src/core/interface/handler';
 import { FormatterInterface } from '../../src/core/interface/formatter';
 import { LogLevel } from '../../src/core/type/log-level';
-import { formatDebugResponse, formatEmergencyResponse, formatErrorResponse, formatInfoResponse, formatTraceResponse, formatWarningResponse } from '../stubs/formatResponse';
+import {
+  formatDebugResponse,
+  formatEmergencyResponse,
+  formatErrorResponse,
+  formatInfoResponse,
+  formatTraceResponse,
+  formatWarningResponse,
+} from '../stubs/formatResponse';
 
 describe('Logger', () => {
-	let handlerMock = createMock<HandlerInterface>({
-		isHandling: jest.fn(),
-		handle: jest.fn()
-	})
-	
-	let formatterMock = createMock<FormatterInterface>({
-		format: jest.fn(),
-	})
-	
-	let logger = new Logger(handlerMock, formatterMock)
+  let handlerMock = createMock<HandlerInterface>({
+    isHandling: jest.fn(),
+    handle: jest.fn(),
+  });
 
-	beforeEach(() => {
-		jest.spyOn(Date.prototype, "toISOString").mockReturnValue("2021-01-01T03:00:00.000Z");
-	});
+  let formatterMock = createMock<FormatterInterface>({
+    format: jest.fn(),
+  });
 
-	afterEach(() => {
-		jest.clearAllMocks();
-	})
+  let logger = new Logger(handlerMock, formatterMock);
 
-	it("Should call isHandling with correct payload", () => {
-		jest.spyOn(handlerMock, "isHandling").mockImplementation(() => false);
+  beforeEach(() => {
+    jest
+      .spyOn(Date.prototype, 'toISOString')
+      .mockReturnValue('2021-01-01T03:00:00.000Z');
+  });
 
-		logger.log(LogLevel.info, "mensagem");
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-		expect(handlerMock.isHandling).toBeCalledTimes(1);
-		expect(handlerMock.isHandling).toBeCalledWith(LogLevel.info);
-	});
+  it('Should call isHandling with correct payload', () => {
+    jest.spyOn(handlerMock, 'isHandling').mockImplementation(() => false);
 
-	it("Should return false when isHandling is false", () => {
-		jest.spyOn(handlerMock, "isHandling").mockImplementation(() => false);
-		
-		const response = logger.log(LogLevel.info, "mensagem");
-		
-		expect(handlerMock.isHandling).toBeCalledTimes(1);
-		expect(handlerMock.isHandling).toBeCalledWith(LogLevel.info);
-		expect(response).toBeFalsy();
-	});
-	
-	it("Should call format when isHandling is true", () => {
-		jest.spyOn(handlerMock, "isHandling").mockImplementation(() => true);
-		
-		logger.log(LogLevel.info, "mensagem", {global_event_name: "teste"});
+    logger.log(LogLevel.info, 'mensagem');
 
-		expect(formatterMock.format).toBeCalledTimes(1);
-		expect(formatterMock.format).toBeCalledWith("mensagem", LogLevel.info, {global_event_name: "teste"});
-	});
+    expect(handlerMock.isHandling).toBeCalledTimes(1);
+    expect(handlerMock.isHandling).toBeCalledWith(LogLevel.info);
+  });
 
-	it("Should call handle when isHandling is true", () => {
-		jest.spyOn(handlerMock, "isHandling").mockImplementation(() => true);
-		jest.spyOn(formatterMock, "format").mockImplementation(() => formatInfoResponse);
-		
-		logger.log(LogLevel.info, "mensagem", {global_event_name: "teste"});
+  it('Should return false when isHandling is false', () => {
+    jest.spyOn(handlerMock, 'isHandling').mockImplementation(() => false);
 
-		expect(handlerMock.handle).toBeCalledTimes(1);
-		expect(handlerMock.handle).toBeCalledWith(formatInfoResponse);
-	});
+    const response = logger.log(LogLevel.info, 'mensagem');
 
-	it("Should return true when success", () => {
-		jest.spyOn(handlerMock, "isHandling").mockImplementation(() => true);
-		jest.spyOn(formatterMock, "format").mockImplementation(() => formatInfoResponse);
-		
-		const response = logger.log(LogLevel.info, "mensagem", {global_event_name: "teste"});
+    expect(handlerMock.isHandling).toBeCalledTimes(1);
+    expect(handlerMock.isHandling).toBeCalledWith(LogLevel.info);
+    expect(response).toBeFalsy();
+  });
 
-		expect(response).toBeTruthy();
-	});
+  it('Should call format when isHandling is true', () => {
+    jest.spyOn(handlerMock, 'isHandling').mockImplementation(() => true);
 
-	it("Should call Log with Trace params and handle with correctly params", () => {
-		jest.spyOn(handlerMock, "isHandling").mockImplementation(() => true);
-		jest.spyOn(formatterMock, "format").mockImplementation(() => formatTraceResponse);
-		
-		logger.trace("message", {global_event_name: "teste"});
-		expect(handlerMock.handle).toBeCalledTimes(1);
-		expect(handlerMock.handle).toBeCalledWith(formatTraceResponse);
-	});
+    logger.log(LogLevel.info, 'mensagem', { global_event_name: 'teste' });
 
-	it("Should call Log with Debug params and handle with correctly params", () => {
-		jest.spyOn(handlerMock, "isHandling").mockImplementation(() => true);
-		jest.spyOn(formatterMock, "format").mockImplementation(() => formatDebugResponse);
-		
-		logger.debug("message", {global_event_name: "teste"});
-		expect(handlerMock.handle).toBeCalledTimes(1);
-		expect(handlerMock.handle).toBeCalledWith(formatDebugResponse);
-	});
+    expect(formatterMock.format).toBeCalledTimes(1);
+    expect(formatterMock.format).toBeCalledWith('mensagem', LogLevel.info, {
+      global_event_name: 'teste',
+    });
+  });
 
-	it("Should call Log with Info params and handle with correctly params", () => {
-		jest.spyOn(handlerMock, "isHandling").mockImplementation(() => true);
-		jest.spyOn(formatterMock, "format").mockImplementation(() => formatInfoResponse);
-		
-		logger.info("message", {global_event_name: "teste"});
-		expect(handlerMock.handle).toBeCalledTimes(1);
-		expect(handlerMock.handle).toBeCalledWith(formatInfoResponse);
-	});
+  it('Should call handle when isHandling is true', () => {
+    jest.spyOn(handlerMock, 'isHandling').mockImplementation(() => true);
+    jest
+      .spyOn(formatterMock, 'format')
+      .mockImplementation(() => formatInfoResponse);
 
-	it("Should call Log with Warning params and handle with correctly params", () => {
-		jest.spyOn(handlerMock, "isHandling").mockImplementation(() => true);
-		jest.spyOn(formatterMock, "format").mockImplementation(() => formatWarningResponse);
-		
-		logger.warning("message", {global_event_name: "teste"});
-		expect(handlerMock.handle).toBeCalledTimes(1);
-		expect(handlerMock.handle).toBeCalledWith(formatWarningResponse);
-	});
+    logger.log(LogLevel.info, 'mensagem', { global_event_name: 'teste' });
 
-	it("Should call Log with Error params and handle with correctly params", () => {
-		jest.spyOn(handlerMock, "isHandling").mockImplementation(() => true);
-		jest.spyOn(formatterMock, "format").mockImplementation(() => formatErrorResponse);
-		
-		logger.error("message", {global_event_name: "teste"});
-		expect(handlerMock.handle).toBeCalledTimes(1);
-		expect(handlerMock.handle).toBeCalledWith(formatErrorResponse);
-	});
+    expect(handlerMock.handle).toBeCalledTimes(1);
+    expect(handlerMock.handle).toBeCalledWith(formatInfoResponse);
+  });
 
-	it("Should call Log with Emergency params and handle with correctly params", () => {
-		jest.spyOn(handlerMock, "isHandling").mockImplementation(() => true);
-		jest.spyOn(formatterMock, "format").mockImplementation(() => formatEmergencyResponse);
-		
-		logger.emergency("message", {global_event_name: "teste"});
-		expect(handlerMock.handle).toBeCalledTimes(1);
-		expect(handlerMock.handle).toBeCalledWith(formatEmergencyResponse);
-	});
+  it('Should return true when success', () => {
+    jest.spyOn(handlerMock, 'isHandling').mockImplementation(() => true);
+    jest
+      .spyOn(formatterMock, 'format')
+      .mockImplementation(() => formatInfoResponse);
 
+    const response = logger.log(LogLevel.info, 'mensagem', {
+      global_event_name: 'teste',
+    });
+
+    expect(response).toBeTruthy();
+  });
+
+  it('Should call Log with Trace params and handle with correctly params', () => {
+    jest.spyOn(handlerMock, 'isHandling').mockImplementation(() => true);
+    jest
+      .spyOn(formatterMock, 'format')
+      .mockImplementation(() => formatTraceResponse);
+
+    logger.trace('message', { global_event_name: 'teste' });
+    expect(handlerMock.handle).toBeCalledTimes(1);
+    expect(handlerMock.handle).toBeCalledWith(formatTraceResponse);
+  });
+
+  it('Should call Log with Debug params and handle with correctly params', () => {
+    jest.spyOn(handlerMock, 'isHandling').mockImplementation(() => true);
+    jest
+      .spyOn(formatterMock, 'format')
+      .mockImplementation(() => formatDebugResponse);
+
+    logger.debug('message', { global_event_name: 'teste' });
+    expect(handlerMock.handle).toBeCalledTimes(1);
+    expect(handlerMock.handle).toBeCalledWith(formatDebugResponse);
+  });
+
+  it('Should call Log with Info params and handle with correctly params', () => {
+    jest.spyOn(handlerMock, 'isHandling').mockImplementation(() => true);
+    jest
+      .spyOn(formatterMock, 'format')
+      .mockImplementation(() => formatInfoResponse);
+
+    logger.info('message', { global_event_name: 'teste' });
+    expect(handlerMock.handle).toBeCalledTimes(1);
+    expect(handlerMock.handle).toBeCalledWith(formatInfoResponse);
+  });
+
+  it('Should call Log with Warning params and handle with correctly params', () => {
+    jest.spyOn(handlerMock, 'isHandling').mockImplementation(() => true);
+    jest
+      .spyOn(formatterMock, 'format')
+      .mockImplementation(() => formatWarningResponse);
+
+    logger.warning('message', { global_event_name: 'teste' });
+    expect(handlerMock.handle).toBeCalledTimes(1);
+    expect(handlerMock.handle).toBeCalledWith(formatWarningResponse);
+  });
+
+  it('Should call Log with Error params and handle with correctly params', () => {
+    jest.spyOn(handlerMock, 'isHandling').mockImplementation(() => true);
+    jest
+      .spyOn(formatterMock, 'format')
+      .mockImplementation(() => formatErrorResponse);
+
+    logger.error('message', { global_event_name: 'teste' });
+    expect(handlerMock.handle).toBeCalledTimes(1);
+    expect(handlerMock.handle).toBeCalledWith(formatErrorResponse);
+  });
+
+  it('Should call Log with Emergency params and handle with correctly params', () => {
+    jest.spyOn(handlerMock, 'isHandling').mockImplementation(() => true);
+    jest
+      .spyOn(formatterMock, 'format')
+      .mockImplementation(() => formatEmergencyResponse);
+
+    logger.emergency('message', { global_event_name: 'teste' });
+    expect(handlerMock.handle).toBeCalledTimes(1);
+    expect(handlerMock.handle).toBeCalledWith(formatEmergencyResponse);
+  });
 });

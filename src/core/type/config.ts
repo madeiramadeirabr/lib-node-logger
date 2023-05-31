@@ -1,4 +1,4 @@
 export type Config = {
-    level: string,
-    serviceName: string
-}
+  level: string;
+  serviceName: string;
+};

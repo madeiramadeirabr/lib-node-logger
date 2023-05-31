@@ -1,5 +1,5 @@
-import { LogMessageOptions } from "../type/log-message-options-type";
+import { LogMessageOptions } from '../type/log-message-options-type';
 
 export interface FormatterInterface {
-    format(message: string, level: string, options?: LogMessageOptions): string
+  format(message: string, level: string, options?: LogMessageOptions): string;
 }
