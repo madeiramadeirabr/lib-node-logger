@@ -1,4 +1,6 @@
+import { LogLevel } from "./log-level";
+
 export type Config = {
-  level: string;
+  level: LogLevel;
   serviceName: string;
 };

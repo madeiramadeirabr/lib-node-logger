@@ -5,8 +5,8 @@ import { Handler } from './core/handler';
 import { FormatterInterface } from './core/interface/formatter';
 import { Formatter } from './core/formatter';
 import { Config } from './core/type/config';
-import { NodeStreamLogger } from 'core/node-logger-stream';
-import { StreamLoggerInterface } from 'core/interface/stream-logger';
+import { NodeStreamLogger } from './core/node-logger-stream';
+import { StreamLoggerInterface } from './core/interface/stream-logger';
 
 export class Container {
   private static dependencies: Map<string, any> = new Map();
