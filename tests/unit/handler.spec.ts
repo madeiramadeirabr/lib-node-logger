@@ -1,6 +1,5 @@
 import { LogLevel } from '../../src/core/type/log-level';
 import { Handler } from '../../src/core/handler';
-import { levelStringToInt } from '../../src/core/type/log-level';
 import { createMock } from 'ts-auto-mock';
 import { StreamLoggerInterface } from '../../src/core/interface/stream-logger';
 
@@ -18,7 +17,8 @@ describe('Handler', () => {
       let handler = new Handler(streamLoggerMock, levelHandler);
       levels.map((levelMessage) => {
         let expected =
-          levelStringToInt(levelMessage) >= levelStringToInt(levelHandler);
+          handler.levelStringToInt(levelMessage) >=
+          handler.levelStringToInt(levelHandler);
 
         it(`Should return ${expected} when message is ${levelMessage} and handler is ${levelHandler}`, () => {
           let response = handler.isHandling(levelMessage);
@@ -34,7 +34,7 @@ describe('Handler', () => {
       jest.clearAllMocks();
     });
 
-    it('Should call log function with correct params', () => { 
+    it('Should call log function with correct params', () => {
       const handler = new Handler(streamLoggerMock, LogLevel.info);
 
       handler.handle('message');

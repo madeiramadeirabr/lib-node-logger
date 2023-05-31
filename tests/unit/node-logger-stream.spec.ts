@@ -1,7 +1,5 @@
 import { NodeStreamLogger } from '../../src/core/node-logger-stream';
 
-//prevent log to console during tests
-jest.spyOn(process.stdout, 'write').mockImplementation();
 describe('NodeStreamLogger', () => {
   let logger: NodeStreamLogger;
 
@@ -9,8 +7,9 @@ describe('NodeStreamLogger', () => {
     logger = new NodeStreamLogger();
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
+  beforeEach(() => {
+    //prevent log to console during tests
+    jest.spyOn(process.stdout, 'write').mockImplementation();
   });
 
   afterAll(() => {
