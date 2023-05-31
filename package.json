@@ -14,7 +14,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:badges": "npm run test:coverage  && jest-coverage-badges output ./icons"
+    "test:badges": "npm run test:coverage  && jest-coverage-badges output ./icons",
+    "postinstall": "npm run build"
   },
   "devDependencies": {
     "@types/jest": "^29.5.1",
