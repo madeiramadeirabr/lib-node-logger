@@ -9,7 +9,7 @@ Nessa documentação temos:
 
 ## Como usar
 
-O exemplo abaixo mostra como instânciar um objeto `Logger`, passando o log level e o nome da aplicação.
+O exemplo abaixo mostra como instânciar um objeto `Logger` passando o log level e o nome da aplicação.
 ```javascript
 import { Container } from '../src/container';
 import { LogLevel } from '../src/core/type/log-level';
