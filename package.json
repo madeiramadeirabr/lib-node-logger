@@ -1,5 +1,5 @@
 {
-  "name": "lib-nodejs-logger",
+  "name": "lib-node-logger",
   "version": "1.0.0",
   "description": "",
   "main": "dist/src/index.js",
