@@ -3,5 +3,5 @@
 Para instalar a biblioteca de Logs, execute o seguinte comando:
 
 ```bash
-$ npm install https://github.com/madeiramadeirabr/lib-nodejs-logger --save
+$ npm install https://github.com/madeiramadeirabr/lib-node-logger --save
 ```
