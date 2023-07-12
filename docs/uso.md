@@ -44,8 +44,8 @@ function main() {
 
 Para alterar as configurações, basta no gerenciador de dependências, atualizar os campos `level` ou `serviceName`.
 
-**Exemplo:**
-```javascript
+**Exemplo em Typescript:**
+```typescript
 import { Container } from '../src/container';
 import { LogLevel } from '../src/core/type/log-level';
 
@@ -89,14 +89,27 @@ main();
 }
 
 {
-    "message": "Simple warning event occurred",
-    "level": "WARNING",
-    "service_name": "my-application-name",
-    "global_event_timestamp": "2023-07-06T18:52:44.845Z",
+    "message": "Simpljavascriptestamp": "2023-07-06T18:52:44.845Z",
     "context": {
         "foo": "bar"
     },
     "global_event_name": "EVENT_TEST",
     "trace_id": "abcde"
 }
+```
+
+**Exemplo em Javascript:**
+```javascript
+const { Container, LogLevel } = require("lib-node-logger");
+
+function main() {
+  const logger = Container.getLogger({
+    level: LogLevel.info,
+    serviceName: 'example',
+  });
+
+  logger.info('Hello World');
+}
+
+main();
 ```
