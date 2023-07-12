@@ -1,15 +1,22 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "lib": [
+      "es5"
+    ],
+    "esModuleInterop": true,
     "moduleResolution": "node",
-    "pretty": true,
-    "resolveJsonModule": true,
+    "removeComments": true,
     "sourceMap": true,
-    "target": "es2021",
-    "outDir": "./dist",
-    "baseUrl": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "strict": true,
+    "skipLibCheck": true,
+    "target": "es5",
+    "outDir": "dist",
+    "module": "commonjs",
     "plugins": [
       {
         "transform": "ts-auto-mock/transformer",
@@ -17,6 +24,20 @@
       }
     ]
   },
-  "include": ["src/**/*.ts", "tests/**/*.spec.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules/**/*",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    "_warmup/**/*",
+    ".vscode/**/*",
+    ".idea/**/*",
+    ".husky/**/*",
+    ".github/**/*",
+    "dist",
+    "test",
+    "**/*spec.ts"
+  ]
 }
