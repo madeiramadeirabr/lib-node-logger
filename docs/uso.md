@@ -89,7 +89,7 @@ main();
 }
 
 {
-    "message": "Simpljavascriptestamp": "2023-07-06T18:52:44.845Z",
+    "message": "Simple info event occurred": "2023-07-06T18:52:44.845Z",
     "context": {
         "foo": "bar"
     },
