@@ -1,8 +1,8 @@
 # Documentação Técnica
 
 - [Instalação](./instalacao.md)
-- Uso
-  - [Node JS](./uso.md)
+- [Como utilizar](./uso.md)
+- [Executando os testes](./tests.md)
   
 ## Versões suportadas
 
