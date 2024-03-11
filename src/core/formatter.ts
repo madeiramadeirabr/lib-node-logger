@@ -3,9 +3,12 @@ import { LogMessageOptions } from './type/log-message-options-type';
 import { LogMessage } from './type/log-message-type';
 
 export class Formatter implements FormatterInterface {
-  constructor(private readonly serviceName: string) {}
+  constructor(
+    private readonly serviceName: string,
+    private readonly isDevelopmentEnv: boolean,
+  ) {}
 
-  format(message: string, level: string, args: LogMessageOptions): string {
+  format(message: string, level: string, args: LogMessageOptions): string | void {
     const formattedMessage = {
       message,
       level,
@@ -13,6 +16,8 @@ export class Formatter implements FormatterInterface {
       global_event_timestamp: new Date().toISOString(),
       ...args,
     } as LogMessage;
+
+    if (this.isDevelopmentEnv) console.log(formattedMessage); return null;
 
     return JSON.stringify(formattedMessage);
   }
