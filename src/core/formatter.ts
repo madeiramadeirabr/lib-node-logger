@@ -18,8 +18,7 @@ export class Formatter implements FormatterInterface {
     } as LogMessage;
 
     if (this.isDevelopmentEnv) {
-      console.log(formattedMessage);
-      return '';
+      return JSON.stringify(formattedMessage, null, 2);
     }
 
     return JSON.stringify(formattedMessage);
