@@ -9,7 +9,11 @@ Nessa documentação temos:
 
 ## Como usar
 
-O exemplo abaixo mostra como instânciar um objeto `Logger` passando o log level e o nome da aplicação.
+O exemplo abaixo mostra como instânciar um objeto `Logger` passando o log level, o nome da aplicação e a flag se é ambiente de desenvolvimento (opcional) como padrão é `false`. 
+
+> **Atenção:**
+> A flag para dizer se é ambiente de desenvolvimento é uma forma que faz imprimir o log formatado com `console.log()`. Não deve ser passada como `true` em ambientes de teste e produção.
+
 ```javascript
 import { Container } from '../src/container';
 import { LogLevel } from '../src/core/type/log-level';
@@ -18,6 +22,7 @@ function main() {
   const logger = Container.getLogger({
     level: LogLevel.info,
     serviceName: 'example',
+    isDevelopmentEnv: false,
   });
 
   logger.info('Hello World');
@@ -26,7 +31,7 @@ function main() {
 
 ## Como alterar as configurações
 
-Para alterar as configurações, basta no gerenciador de dependências, atualizar os campos `level` ou `serviceName`.
+Para alterar as configurações, basta no gerenciador de dependências, atualizar os campos `level`, `serviceName` ou `isDevelopmentEnv`.
 
 ```javascript
 import { Container } from '../src/container';
@@ -36,13 +41,14 @@ function main() {
   const logger = Container.getLogger({
     level: LogLevel.warning,
     serviceName: 'my-application-name',
+    isDevelopmentEnv: false,
   });
 }
 ```
 
 ## Exemplos de uso
 
-Para alterar as configurações, basta no gerenciador de dependências, atualizar os campos `level` ou `serviceName`.
+Para alterar as configurações, basta no gerenciador de dependências, atualizar os campos `level`, `serviceName` ou `isDevelopmentEnv`.
 
 **Exemplo em Typescript:**
 ```typescript
@@ -50,9 +56,11 @@ import { Container } from '../src/container';
 import { LogLevel } from '../src/core/type/log-level';
 
 function main() {
+  const isDevEnv = process.env.APPLICATION_ENV == "development";
   const logger = Container.getLogger({
     level: LogLevel.info,
     serviceName: 'my-application-name',
+    isDevelopmentEnv: isDevEnv,
   });
 
   logger.info("Simple info event occurred", {
@@ -103,9 +111,11 @@ main();
 const { Container, LogLevel } = require("lib-node-logger");
 
 function main() {
+  const isDevEnv = process.env.APPLICATION_ENV == "development";
   const logger = Container.getLogger({
     level: LogLevel.info,
     serviceName: 'example',
+    isDevelopmentEnv: isDevEnv,
   });
 
   logger.info('Hello World');
