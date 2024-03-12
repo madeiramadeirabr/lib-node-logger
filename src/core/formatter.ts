@@ -5,10 +5,10 @@ import { LogMessage } from './type/log-message-type';
 export class Formatter implements FormatterInterface {
   constructor(
     private readonly serviceName: string,
-    private readonly isDevelopmentEnv: boolean,
+    private readonly isDevelopmentEnv?: boolean,
   ) {}
 
-  format(message: string, level: string, args: LogMessageOptions): string | void {
+  format(message: string, level: string, args: LogMessageOptions): string {
     const formattedMessage = {
       message,
       level,
@@ -17,7 +17,10 @@ export class Formatter implements FormatterInterface {
       ...args,
     } as LogMessage;
 
-    if (this.isDevelopmentEnv) console.log(formattedMessage); return null;
+    if (this.isDevelopmentEnv) {
+      console.log(formattedMessage);
+      return '';
+    }
 
     return JSON.stringify(formattedMessage);
   }
