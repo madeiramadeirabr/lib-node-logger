@@ -2,7 +2,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['prettier', '@typescript-eslint'],
   parserOptions: {
-    project: './tsconfig.json',
+    project: ['./tsconfig.json', './tsconfig.test.json'],
     ecmaVersion: 2021,
     sourceType: 'module',
   },
@@ -19,5 +19,5 @@ module.exports = {
       { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
     ],
     semi: ['error', 'always'],
-  },
+  }
 };
