@@ -10,6 +10,7 @@ describe('Formatter', () => {
   beforeEach(() => {
     mockFormatter = {
       serviceName: 'service',
+      format: jest.fn()
     } as unknown as jest.Mocked<FormatterInterface>;
 
     logStandardFormatterDecorator = new LogStandardEventFormatterDecorator(mockFormatter);
@@ -20,6 +21,17 @@ describe('Formatter', () => {
   });
 
   it('Should format correctly with a generic event name', () => {
+    mockFormatter.format.mockReturnValue(
+      JSON.stringify({
+        message: 'mensagem',
+        level: LogLevel.info,
+        global_event_timestamp: '2021-01-01T03:00:00.000Z',
+        service_name: 'service',
+        global_event_name: 'teste',
+        context: {},
+      })
+    );
+
     const response = logStandardFormatterDecorator.format('mensagem', LogLevel.info, {
       global_event_name: 'teste',
     });
@@ -30,10 +42,14 @@ describe('Formatter', () => {
       global_event_timestamp: '2021-01-01T03:00:00.000Z',
       service_name: 'service',
       global_event_name: 'teste',
-      context: {}
+      context: {},
     });
 
     expect(response).toBe(expected);
+
+    expect(mockFormatter.format).toHaveBeenCalledWith('mensagem', LogLevel.info, {
+      global_event_name: 'teste',
+    });
   });
 
   it('Should format correctly when PROCESS_STARTUP_FAILED is sent with all required fields and correct log level', () => {

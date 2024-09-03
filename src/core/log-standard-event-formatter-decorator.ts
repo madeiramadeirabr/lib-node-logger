@@ -61,10 +61,7 @@ export class LogStandardEventFormatterDecorator implements FormatterInterface {
       !args.global_event_name ||
       !this.isKnownEventName(args.global_event_name)
     ) {
-      return JSON.stringify({
-        ...formattedMessage,
-        context: args?.context || {},
-      });
+      return this.baseFormatter.format(message, level, args);
     }
 
     args.context = args.context || {};
