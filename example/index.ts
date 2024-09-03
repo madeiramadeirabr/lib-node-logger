@@ -1,5 +1,4 @@
-import { Container } from '../src/container';
-import { LogLevel } from '../src/core/type/log-level';
+import { Container, LogLevel, LogStandardGlobalEventNameEnum, UseCaseExecutionFailedContextType } from '../src';
 
 function main() {
   const logger = Container.getLogger({
@@ -7,7 +6,29 @@ function main() {
     serviceName: 'example',
   });
 
+  // Log without standard events
   logger.info('Hello World');
+
+    // Log with standard events
+  logger.error('Execution failed', {
+    global_event_name: LogStandardGlobalEventNameEnum.USE_CASE_EXECUTION_FAILED,
+    context: {
+      reason: 'User creation failed',
+      service: 'UserCreationUseCase',
+      action: 'create',
+      stack: 'xxx'
+    } as UseCaseExecutionFailedContextType,
+  })
+
+  logger.warning('Execution failed', {
+    global_event_name: LogStandardGlobalEventNameEnum.USE_CASE_EXECUTION_FAILED,
+    context: {
+      reason: 'User creation failed',
+      service: 'UserCreationUseCase',
+      action: 'create',
+      stack: 'xxx'
+    } as UseCaseExecutionFailedContextType,
+  })
 }
 
 main();
