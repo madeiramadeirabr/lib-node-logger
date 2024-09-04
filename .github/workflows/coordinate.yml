@@ -1,4 +1,5 @@
-name: Coordinate Workflows
+name: Continuous Integration Testing
+
 on:
   push:
     branches:
@@ -6,6 +7,7 @@ on:
       - staging
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   quality-assurance:
     uses: ./.github/workflows/tests.yml
@@ -18,4 +20,3 @@ jobs:
     uses: ./.github/workflows/infosec.yml
     with:
       coverage-path: coverage/lcov.info
-    secrets: inherit

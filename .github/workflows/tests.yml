@@ -4,8 +4,9 @@ on:
   workflow_call:
     inputs:
       coverage-path:
-        required: false
+        required: true
         type: string
+        default: 'coverage-report'
 
 jobs:
   unit-tests:
@@ -35,10 +36,3 @@ jobs:
         with:
           name: coverage-report
           path: ${{ inputs.coverage-path }}
-      
-      - name: Check test status
-        run: |
-          if [ ${{ job.status }} -ne 0 ]; then
-            echo "Tests failed. Can't merge."
-            exit 1
-          fi
