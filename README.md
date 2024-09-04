@@ -20,4 +20,5 @@ Aberto para qualquer equipe atualizar e implementar funcionalidades
 - [Documentação técnica](./docs/README.md)
     - [Instalação](./docs/instalacao.md)
     - [Como utilizar](./docs/uso.md)
+    - [Como usar o padrão de eventos MMRFC 5](./docs/standard-events.md)
     - [Executando os testes](./docs/tests.md)

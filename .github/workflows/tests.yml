@@ -1,7 +1,12 @@
+name: Run tests on pull_request
+
 on:
-  pull_request:
-    branches:
-      - "production"
+  workflow_call:
+    inputs:
+      coverage-path:
+        required: true
+        type: string
+        default: 'coverage-report'
 
 jobs:
   unit-tests:
@@ -25,3 +30,9 @@ jobs:
 
       - name: Run tests
         run: npm run test:coverage
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: ${{ inputs.coverage-path }}

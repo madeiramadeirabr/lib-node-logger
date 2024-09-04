@@ -7,6 +7,7 @@ import { Formatter } from './core/formatter';
 import { Config } from './core/type/config';
 import { NodeStreamLogger } from './core/node-logger-stream';
 import { StreamLoggerInterface } from './core/interface/stream-logger';
+import { LogStandardEventFormatterDecorator } from './core/log-standard-event-formatter-decorator';
 
 export class Container {
   private static dependencies: Map<string, any> = new Map();
@@ -38,7 +39,11 @@ export class Container {
 
   public static makeFormatter(serviceName: string, isDevelopmentEnv: boolean ): FormatterInterface {
     return Container.make<FormatterInterface>('Formatter', () => {
-      return new Formatter(serviceName, isDevelopmentEnv);
+      const baseFormatter = new Formatter(serviceName, isDevelopmentEnv);
+      const decoratedFormatter = new LogStandardEventFormatterDecorator(
+        baseFormatter,
+      );
+      return decoratedFormatter;
     });
   }
 

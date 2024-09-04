@@ -1,15 +1,16 @@
-name: Application security
+name: Information Security Workflow
 
 on:
-  push:
-    branches:
-      - production
-      - master
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
+  workflow_call:
+    inputs:
+      coverage-path:
+        required: false
+        type: string
 
 jobs:
-  scans:
-      uses: madeiramadeirabr/private_action-information-security-validators/.github/workflows/main.yml@production
-      secrets: inherit
+  application-security:
+    name: actions
+    uses: madeiramadeirabr/private_action-information-security-validators/.github/workflows/main.yml@production
+    with:
+      coverage-path: ${{ inputs.coverage-path }}
+    secrets: inherit
