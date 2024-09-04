@@ -6,7 +6,6 @@ on:
       coverage-path:
         required: false
         type: string
-        default: 'coverage-report'
 
 jobs:
   application-security:
