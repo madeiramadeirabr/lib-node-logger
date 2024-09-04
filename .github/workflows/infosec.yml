@@ -11,6 +11,6 @@ on:
 jobs:
   application-security:
     name: actions
-    uses: madeiramadeirabr/private_action-information-security-validators/.github/workflows/main.yml@development
+    uses: madeiramadeirabr/private_action-information-security-validators/.github/workflows/main.yml@production
     with:
       coverage-path: ${{ github.event.inputs.coverage-path }}
