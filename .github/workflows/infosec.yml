@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       coverage-path:
-        required: true
+        required: false
         type: string
         default: 'coverage-report'
 
@@ -13,4 +13,5 @@ jobs:
     name: actions
     uses: madeiramadeirabr/private_action-information-security-validators/.github/workflows/main.yml@production
     with:
-      coverage-path: ${{ github.event.inputs.coverage-path }}
+      coverage-path: ${{ inputs.coverage-path }}
+    secrets: inherit
