@@ -1,7 +1,11 @@
+name: Run tests on pull_request
+
 on:
-  pull_request:
-    branches:
-      - "production"
+  workflow_call:
+    inputs:
+      coverage-path:
+        required: false
+        type: string
 
 jobs:
   unit-tests:
@@ -25,3 +29,16 @@ jobs:
 
       - name: Run tests
         run: npm run test:coverage
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: ${{ inputs.coverage-path }}
+      
+      - name: Check test status
+        run: |
+          if [ ${{ job.status }} -ne 0 ]; then
+            echo "Tests failed. Can't merge."
+            exit 1
+          fi

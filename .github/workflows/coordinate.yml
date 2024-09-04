@@ -1,0 +1,21 @@
+name: Coordinate Workflows
+on:
+  push:
+    branches:
+      - production
+      - staging
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  quality-assurance:
+    uses: ./.github/workflows/tests.yml
+    with:
+      coverage-path: coverage/lcov.info
+
+  information-security:
+    needs: quality-assurance
+    name: information-security
+    uses: ./.github/workflows/infosec.yml
+    with:
+      coverage-path: coverage/lcov.info
+    secrets: inherit
