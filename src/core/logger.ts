@@ -21,6 +21,7 @@ export class Logger implements LoggerInterface {
 
     return true;
   }
+
   trace(message: string, args?: LogMessageOptions): void {
     this.log(LogLevel.trace, message, args);
   }

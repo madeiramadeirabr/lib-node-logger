@@ -5,6 +5,8 @@ function main() {
   const logger = Container.getLogger({
     level: LogLevel.info,
     serviceName: 'example',
+    enableTraceId: true,
+    isDevelopmentEnv: true,
   });
 
   logger.info('Hello World');
