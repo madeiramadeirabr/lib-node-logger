@@ -10,7 +10,11 @@ export class Logger implements LoggerInterface {
     private readonly formatter: FormatterInterface,
   ) {}
 
-  log(level: LogLevel, message: string, args?: LogMessageOptions): boolean {
+  private log(
+    level: LogLevel,
+    message: string,
+    args?: LogMessageOptions,
+  ): boolean {
     if (!this.handler.isHandling(level)) {
       return false;
     }
@@ -31,6 +35,7 @@ export class Logger implements LoggerInterface {
   }
 
   info(message: string, args?: LogMessageOptions): void {
+    console.log(args);
     this.log(LogLevel.info, message, args);
   }
 
