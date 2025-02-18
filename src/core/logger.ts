@@ -35,7 +35,6 @@ export class Logger implements LoggerInterface {
   }
 
   info(message: string, args?: LogMessageOptions): void {
-    console.log(args);
     this.log(LogLevel.info, message, args);
   }
 
