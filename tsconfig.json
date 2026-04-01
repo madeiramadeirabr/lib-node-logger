@@ -16,13 +16,7 @@
     "skipLibCheck": true,
     "target": "es2015",
     "outDir": "dist",
-    "module": "commonjs",
-    "plugins": [
-      {
-        "transform": "ts-auto-mock/transformer",
-        "cacheBetweenTests": false
-      }
-    ]
+    "module": "commonjs"
   },
   "include": [
     "src/**/*.ts",

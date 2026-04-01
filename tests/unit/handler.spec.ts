@@ -1,13 +1,14 @@
 import { LogLevel } from '../../src/core/type/log-level';
 import { Handler } from '../../src/core/handler';
-import { createMock } from 'ts-auto-mock';
 import { StreamLoggerInterface } from '../../src/core/interface/stream-logger';
 
 describe('Handler', () => {
   let streamLoggerMock: StreamLoggerInterface;
 
   beforeAll(() => {
-    streamLoggerMock = createMock<StreamLoggerInterface>();
+    streamLoggerMock = {
+      log: jest.fn(),
+    } as any;
   });
 
   describe('isHandling', () => {

@@ -1,4 +1,3 @@
-import { createMock } from 'ts-auto-mock';
 import { Logger } from '../../src/core/logger';
 import { HandlerInterface } from '../../src/core/interface/handler';
 import { FormatterInterface } from '../../src/core/interface/formatter';
@@ -10,14 +9,14 @@ describe('Logger Context Providers', () => {
   let formatterMock: FormatterInterface;
 
   beforeEach(() => {
-    handlerMock = createMock<HandlerInterface>({
+    handlerMock = {
       isHandling: jest.fn().mockReturnValue(true),
       handle: jest.fn(),
-    });
+    } as any;
 
-    formatterMock = createMock<FormatterInterface>({
+    formatterMock = {
       format: jest.fn(),
-    });
+    } as any;
   });
 
   afterEach(() => {
@@ -25,11 +24,11 @@ describe('Logger Context Providers', () => {
   });
 
   it('Should enrich log message with data from a single context provider', () => {
-    const providerMock = createMock<LogContextProviderInterface>({
+    const providerMock: LogContextProviderInterface = {
       getContext: jest
         .fn()
         .mockReturnValue({ trace_id: '123', span_id: '456' }),
-    });
+    };
 
     const logger = new Logger(handlerMock, formatterMock, [providerMock]);
     logger.info('test message');
@@ -42,12 +41,12 @@ describe('Logger Context Providers', () => {
   });
 
   it('Should enrich log message with data from multiple context providers', () => {
-    const provider1 = createMock<LogContextProviderInterface>({
+    const provider1: LogContextProviderInterface = {
       getContext: jest.fn().mockReturnValue({ trace_id: '123' }),
-    });
-    const provider2 = createMock<LogContextProviderInterface>({
+    };
+    const provider2: LogContextProviderInterface = {
       getContext: jest.fn().mockReturnValue({ user_id: 'abc' }),
-    });
+    };
 
     const logger = new Logger(handlerMock, formatterMock, [
       provider1,
@@ -63,9 +62,9 @@ describe('Logger Context Providers', () => {
   });
 
   it('Should prioritize explicit log arguments over context provider data', () => {
-    const provider = createMock<LogContextProviderInterface>({
+    const provider: LogContextProviderInterface = {
       getContext: jest.fn().mockReturnValue({ trace_id: 'provider-id' }),
-    });
+    };
 
     const logger = new Logger(handlerMock, formatterMock, [provider]);
 
@@ -82,9 +81,9 @@ describe('Logger Context Providers', () => {
   it('Should not call context providers if log level is not being handled', () => {
     jest.spyOn(handlerMock, 'isHandling').mockReturnValue(false);
 
-    const provider = createMock<LogContextProviderInterface>({
+    const provider: LogContextProviderInterface = {
       getContext: jest.fn(),
-    });
+    };
 
     const logger = new Logger(handlerMock, formatterMock, [provider]);
     logger.info('test message');
