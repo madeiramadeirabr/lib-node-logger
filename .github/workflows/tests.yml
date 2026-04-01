@@ -1,14 +1,14 @@
 on:
   pull_request:
     branches:
-      - "production"
+      - 'production'
 
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [14.x, 16.x, 18.x, 20.x, 22.x]
 
     steps:
       - uses: actions/checkout@v3
@@ -16,6 +16,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: update npm
+        run: npm install -g npm@9
 
       - name: npm install
         run: npm install

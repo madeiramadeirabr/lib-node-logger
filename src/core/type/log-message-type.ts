@@ -4,7 +4,9 @@ export type LogMessage = {
   message: string;
   context?: Record<string, any> | Array<any>;
   trace_id?: string;
+  span_id?: string;
   session_id?: string;
   level: string;
   service_name: string;
+  [key: string]: any;
 };

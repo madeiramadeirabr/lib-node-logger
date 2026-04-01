@@ -3,11 +3,13 @@ import { HandlerInterface } from './interface/handler';
 import { FormatterInterface } from './interface/formatter';
 import { LogLevel } from './type/log-level';
 import { LogMessageOptions } from './type/log-message-options-type';
+import { LogContextProviderInterface } from './interface/log-context-provider';
 
 export class Logger implements LoggerInterface {
   constructor(
     private readonly handler: HandlerInterface,
     private readonly formatter: FormatterInterface,
+    private readonly contextProviders: LogContextProviderInterface[] = [],
   ) {}
 
   log(level: LogLevel, message: string, args?: LogMessageOptions): boolean {
@@ -15,7 +17,20 @@ export class Logger implements LoggerInterface {
       return false;
     }
 
-    const formattedMessage = this.formatter.format(message, level, args);
+    let finalArgs = args;
+
+    if (this.contextProviders.length > 0) {
+      finalArgs = args || {};
+      for (const provider of this.contextProviders) {
+        try {
+          finalArgs = { ...provider.getContext(), ...finalArgs };
+        } catch (error) {
+          // We ignore provider errors to ensure logging itself never crashes the application
+        }
+      }
+    }
+
+    const formattedMessage = this.formatter.format(message, level, finalArgs);
 
     this.handler.handle(formattedMessage);
 

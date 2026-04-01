@@ -1,4 +1,3 @@
-import { createMock } from 'ts-auto-mock';
 import { Logger } from '../../src/core/logger';
 import { HandlerInterface } from '../../src/core/interface/handler';
 import { FormatterInterface } from '../../src/core/interface/formatter';
@@ -13,14 +12,14 @@ import {
 } from '../stubs/format-response';
 
 describe('Logger', () => {
-  let handlerMock = createMock<HandlerInterface>({
+  let handlerMock: HandlerInterface = {
     isHandling: jest.fn(),
     handle: jest.fn(),
-  });
+  } as any;
 
-  let formatterMock = createMock<FormatterInterface>({
+  let formatterMock: FormatterInterface = {
     format: jest.fn(),
-  });
+  } as any;
 
   let logger = new Logger(handlerMock, formatterMock);
 

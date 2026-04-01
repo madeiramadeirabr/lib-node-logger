@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": [
-      "es5"
+      "es2015"
     ],
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -14,18 +14,13 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "target": "es5",
+    "target": "es2015",
     "outDir": "dist",
-    "module": "commonjs",
-    "plugins": [
-      {
-        "transform": "ts-auto-mock/transformer",
-        "cacheBetweenTests": false
-      }
-    ]
+    "module": "commonjs"
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "tests/**/*.ts"
   ],
   "exclude": [
     "node_modules/**/*",
@@ -36,8 +31,6 @@
     ".idea/**/*",
     ".husky/**/*",
     ".github/**/*",
-    "dist",
-    "test",
-    "**/*spec.ts"
+    "dist"
   ]
 }

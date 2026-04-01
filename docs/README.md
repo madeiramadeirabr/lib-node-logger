@@ -2,6 +2,7 @@
 
 - [Instalação](./instalacao.md)
 - [Como utilizar](./uso.md)
+- [Enriquecimento Automático (Context Providers)](./context-providers.md)
 - [Executando os testes](./tests.md)
   
 ## Versões suportadas
