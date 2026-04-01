@@ -7,4 +7,5 @@ export type LogMessage = {
   session_id?: string;
   level: string;
   service_name: string;
+  [key: string]: any;
 };

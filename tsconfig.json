@@ -25,7 +25,8 @@
     ]
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "tests/**/*.ts"
   ],
   "exclude": [
     "node_modules/**/*",
@@ -36,8 +37,6 @@
     ".idea/**/*",
     ".husky/**/*",
     ".github/**/*",
-    "dist",
-    "test",
-    "**/*spec.ts"
+    "dist"
   ]
 }

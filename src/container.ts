@@ -19,11 +19,12 @@ export class Container {
     return dependencyInstance;
   }
 
-  public static getLogger({ level, serviceName, isDevelopmentEnv }: Config): LoggerInterface {
+  public static getLogger({ level, serviceName, isDevelopmentEnv, contextProviders }: Config): LoggerInterface {
     return Container.make<LoggerInterface>('Logger', () => {
       const logger = new Logger(
         Container.makeHandler(level),
         Container.makeFormatter(serviceName, isDevelopmentEnv),
+        contextProviders,
       );
 
       return logger;
