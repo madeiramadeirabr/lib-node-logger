@@ -6,11 +6,16 @@ import { Container, LogLevel, LogContextProviderInterface } from '../src/index';
  */
 class SimpleContextProvider implements LogContextProviderInterface {
   getContext() {
-    return {
-      trace_id: 'abc-123-manual',
-      span_id: 'xyz-789-manual',
-      app_version: '1.0.0'
-    };
+
+    try {
+      return {
+        trace_id: 'abc-123-manual',
+        span_id: 'xyz-789-manual',
+        app_version: '1.0.0'
+      };
+    } catch (error) {
+      return {};
+    }
   }
 }
 

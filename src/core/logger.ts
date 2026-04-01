@@ -22,7 +22,11 @@ export class Logger implements LoggerInterface {
     if (this.contextProviders.length > 0) {
       finalArgs = args || {};
       for (const provider of this.contextProviders) {
-        finalArgs = { ...provider.getContext(), ...finalArgs };
+        try {
+          finalArgs = { ...provider.getContext(), ...finalArgs };
+        } catch (error) {
+          // We ignore provider errors to ensure logging itself never crashes the application
+        }
       }
     }
 

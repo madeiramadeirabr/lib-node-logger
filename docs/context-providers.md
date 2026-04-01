@@ -49,16 +49,20 @@ import newrelic from 'newrelic';
 
 export class NewRelicContextProvider implements LogContextProviderInterface {
   getContext() {
-    const metadata = newrelic.getLinkingMetadata();
-    
-    // Mapeia os campos para o padrão esperado pela New Relic e pela MMRFC
-    return {
-      "trace.id": metadata['trace.id'],
-      "span.id": metadata['span.id'],
-      "entity.name": metadata['entity.name'],
-      "entity.guid": metadata['entity.guid'],
-      "hostname": metadata['hostname']
-    };
+    try {
+      const metadata = newrelic.getLinkingMetadata();
+      
+      // Mapeia os campos para o padrão esperado pela New Relic e pela MMRFC
+      return {
+        "trace.id": metadata['trace.id'],
+        "span.id": metadata['span.id'],
+        "entity.name": metadata['entity.name'],
+        "entity.guid": metadata['entity.guid'],
+        "hostname": metadata['hostname']
+      };
+    } catch(error) {
+      return {};
+    }
   }
 }
 ```
