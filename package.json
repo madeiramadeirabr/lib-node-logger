@@ -6,8 +6,9 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --watch src/**/*.ts --exec ts-node ./src/app.ts",
+    "dev": "nodemon --watch src/**/*.ts --exec ts-node ./example/index.ts",
     "build": "tsc -p tsconfig.build.json",
+    "start": "ts-node ./example/index.ts",
     "start:example": "ts-node ./example/index.ts",
     "lint": "eslint --fix --quiet src/**/*.ts",
     "format": "prettier --loglevel silent --write src/**/*.ts",
@@ -36,8 +37,7 @@
     "ts-auto-mock": "3.6.4",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
-    "ttypescript": "^1.5.15",
-    "typescript-eslint-parser": "^22.0.0"
+    "ttypescript": "^1.5.15"
   },
   "jest": {
     "moduleFileExtensions": [

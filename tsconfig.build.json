@@ -5,8 +5,7 @@
     "declaration": true,
     "declarationMap": false,
     "sourceMap": false,
-    "removeComments": true,
-    "types": []
+    "removeComments": true
   },
   "include": [
     "src/**/*.ts"

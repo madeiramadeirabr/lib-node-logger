@@ -56,9 +56,6 @@ export class NewRelicContextProvider implements LogContextProviderInterface {
       return {
         "trace.id": metadata['trace.id'],
         "span.id": metadata['span.id'],
-        "entity.name": metadata['entity.name'],
-        "entity.guid": metadata['entity.guid'],
-        "hostname": metadata['hostname']
       };
     } catch(error) {
       return {};
