@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --watch src/**/*.ts --exec ts-node ./src/app.ts",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "start:example": "ts-node ./example/index.ts",
     "lint": "eslint --fix --quiet src/**/*.ts",
     "format": "prettier --loglevel silent --write src/**/*.ts",
