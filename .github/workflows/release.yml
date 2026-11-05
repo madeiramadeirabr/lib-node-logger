@@ -6,7 +6,7 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: codebuild-madeiramadeira-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - name: Release
         id: release

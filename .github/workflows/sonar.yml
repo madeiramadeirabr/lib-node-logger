@@ -8,7 +8,7 @@ on:
 jobs:
   sonarcloud:
     name: SonarCloud
-    runs-on: ubuntu-latest
+    runs-on: codebuild-madeiramadeira-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@v2
         with:
